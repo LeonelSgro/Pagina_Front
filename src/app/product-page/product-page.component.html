@@ -1,0 +1,16 @@
+<div class="product-page">
+    <img [src]="product.image" [alt]="product.name" />
+    <h2>{{ product.name }}</h2>
+    <h3>Características:</h3>
+    <p>{{ product.features }}</p>
+    <h3>Descripción:</h3>
+    <p>{{ product.description }}</p>
+    <div class="comment-section">
+      <h3>Comentarios</h3>
+      <textarea placeholder="Escribe tu comentario..." [(ngModel)]="newComment"></textarea>
+      <button (click)="addComment()">Enviar comentario</button>
+      <div *ngFor="let comment of comments" class="comment">
+        <p>{{ comment }}</p>
+      </div>
+    </div>
+  </div>

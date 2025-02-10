@@ -1,0 +1,23 @@
+<div class="profile-container">
+    <h2>Perfil</h2>
+    <p><strong>Nombre:</strong> {{ user?.name }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Teléfono:</strong> {{ user?.phone }}</p>
+  
+    <!-- Botón para añadir nueva publicación -->
+    <button (click)="goToAddPublication()">Añadir Publicación</button>
+  
+    <h3>Mis Publicaciones</h3>
+    <div *ngIf="user?.publications?.length > 0; else noPublications">
+      <div *ngFor="let pub of user.publications; let i = index" class="publication">
+        <h4>{{ pub.title }}</h4>
+        <p>{{ pub.description }}</p>
+        <img [src]="pub.image" alt="Imagen de {{ pub.title }}" />
+        <button (click)="deletePublication(i)">Eliminar</button>
+      </div>
+    </div>
+  
+    <ng-template #noPublications>
+      <p>No tienes publicaciones aún.</p>
+    </ng-template>
+</div>

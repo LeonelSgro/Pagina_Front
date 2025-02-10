@@ -1,0 +1,55 @@
+<div class="container">
+  <header class="mb-2">
+    <div class="header-top">
+      <h1 class="text-xl font-bold">E-commerce de Ropa</h1>
+      <div class="input-container">
+        <input 
+          type="text" 
+          placeholder="Buscar productos..." 
+          class="border rounded px-3 py-2 w-full"
+          [(ngModel)]="searchTerm"
+          (input)="filterProducts()"
+        />
+      </div>
+      <!-- Botón del menú desplegable -->
+      <button class="menu-button" (click)="toggleMenu()">☰</button>
+      <div class="menu-dropdown" [class.active]="menuOpen">
+        <!-- Si el usuario está logueado, muestra perfil y cerrar sesión -->
+        <ng-container *ngIf="userLoggedIn; else authOptions">
+          <button class="auth-button" (click)="goToProfile()">Perfil</button>
+          <button class="auth-button" (click)="logout()">Cerrar Sesión</button>
+        </ng-container>
+        <!-- Si no está logueado, muestra las opciones de inicio de sesión y registro -->
+        <ng-template #authOptions>
+          <button class="auth-button" (click)="goToLogin()">Iniciar Sesión</button>
+          <button class="auth-button" (click)="goToRegister()">Registrarse</button>
+        </ng-template>
+      </div>
+    </div>
+    <nav>
+      <button 
+        *ngFor="let category of categories"
+        (click)="selectCategory(category)"
+        [class.selected]="category === selectedCategory"
+        class="category-button">
+        {{ category }}
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div>
+      <h2 class="text-xl font-semibold mb-4">{{ selectedCategory }}</h2>
+      <div class="product-list">
+        <button 
+          *ngFor="let product of getProductsByCategory(selectedCategory)" 
+          class="product-card"
+          (click)="viewProduct(product.id)">
+          <img [src]="product.image" [alt]="product.name" />
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.category }}</p>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>

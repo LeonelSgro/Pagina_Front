@@ -1,0 +1,21 @@
+<div class="add-publication-container">
+    <h2>Añadir Publicación</h2>
+    <form (ngSubmit)="addPublication()">
+      <div class="form-group">
+        <label for="title">Título:</label>
+        <input type="text" id="title" [(ngModel)]="publication.title" name="title" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <textarea id="description" [(ngModel)]="publication.description" name="description" required></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="image">URL de Imagen:</label>
+        <input type="text" id="image" [(ngModel)]="publication.image" name="image" required />
+      </div>
+  
+      <button type="submit">Publicar</button>
+    </form>
+</div>

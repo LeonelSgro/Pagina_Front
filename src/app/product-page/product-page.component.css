@@ -1,0 +1,66 @@
+.product-page {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+  
+  .product-page img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  
+  .product-page h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .product-page h3 {
+    font-size: 1.25rem;
+    margin: 1rem 0 0.5rem;
+    color: #333;
+  }
+  
+  .product-page p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .comment-section {
+    margin-top: 2rem;
+  }
+  
+  .comment-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .comment-section textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    outline: none;
+    resize: vertical;
+  }
+  
+  .comment-section button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #b7d9ff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .comment-section button:hover {
+    background-color: #9cc2f0;
+  }

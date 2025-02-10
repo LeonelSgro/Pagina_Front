@@ -1,0 +1,32 @@
+<div class="product-detail">
+  <!-- Imagen del producto -->
+  <img [src]="product.image" [alt]="product.name" class="product-image" />
+
+  <!-- Nombre del producto -->
+  <h2>{{ product.name }}</h2>
+
+  <!-- Características del producto -->
+  <h3>Características:</h3>
+  <p>{{ product.features }}</p>
+
+  <!-- Descripción del producto -->
+  <h3>Descripción:</h3>
+  <p>{{ product.description }}</p>
+
+  <!-- Sección de comentarios -->
+  <div class="comment-section">
+    <h3>Comentarios</h3>
+    <!-- Campo de texto para agregar un comentario -->
+    <textarea
+      placeholder="Escribe tu comentario..."
+      [(ngModel)]="newComment"
+    ></textarea>
+    <!-- Botón para enviar el comentario -->
+    <button (click)="addComment()">Enviar comentario</button>
+
+    <!-- Lista de comentarios -->
+    <div *ngFor="let comment of comments" class="comment">
+      <p>{{ comment }}</p>
+    </div>
+  </div>
+</div>
