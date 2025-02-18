@@ -7,14 +7,23 @@ import { environment } from '../environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
-  registrar(user: { nombre: string; email: string; password: string; telefono: string; }) {
-    throw new Error('Method not implemented.');
-  }
+
   private apiUrl = environment.apiUrl +"/Posts"; //cambio el path y funcionan
- 
+  private apiUrlUsers = environment.apiUrl +"/useres"; //cambio el path y funcionan
+
   constructor(private http: HttpClient) { }
+  
  
+  registerUser(userData: any) {
+    const payload = { user: userData }; // 🔹 Envolver datos dentro de "user"
+
+    return this.http.post('http://localhost:3000/api/useres/add', payload, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
   getProductos(): Observable<any> {
     return this.http.get(`${this.apiUrl}/all`);
   }
@@ -33,6 +42,15 @@ export class ApiService {
  
   eliminarProducto(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/productos/${id}`);
+  }
+
+
+  getUsuarios(): Observable<any> {
+    return this.http.delete(`${this.apiUrlUsers}/all`);
+  }
+
+  logIn():Observable<any>{
+    return this.http.get(`${this.apiUrlUsers}/logIn`);
   }
 }
  

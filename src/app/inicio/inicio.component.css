@@ -4,6 +4,7 @@ body {
   padding: 0;
   background-color: #f9fafb;
   color: #333;
+  overflow-x: hidden; /* Evita desbordamiento horizontal */
 }
 
 .container {
@@ -12,12 +13,17 @@ body {
   padding: 1rem;
 }
 
+/* NAVBAR MEJORADA */
 header {
   background-color: #ffffff;
   padding: 0.5rem 0; /* Hacemos el encabezado más delgado */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-  width: 100%; /* Ocupa todo el ancho de la página */
+  width: 100vw; /* Asegura que ocupe toda la pantalla */
+  position: fixed; /* Fija la navbar en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .header-top {
@@ -64,10 +70,11 @@ header {
   color: #333;
 }
 
+/* MENÚ DESPLEGABLE MEJORADO */
 .menu-dropdown {
   position: absolute;
-  top: 3rem;
-  right: 1rem;
+  top: 50px; /* Para que se despliegue debajo del botón */
+  right: 10px;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
@@ -75,26 +82,34 @@ header {
   display: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 150px;
+  flex-direction: column; /* Asegura que los botones estén en columna */
+  align-items: stretch; /* Ocupa todo el ancho */
 }
 
 .menu-dropdown.active {
-  display: block;
+  display: flex; /* Hace visible el menú */
 }
 
-.menu-dropdown a {
-  display: block;
+/* BOTONES DEL MENÚ */
+.auth-button {
+  background-color: #1e40af;
+  color: white;
+  border: none;
   padding: 0.5rem 1rem;
-  text-decoration: none;
-  color: #333;
-  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
   transition: background-color 0.2s ease;
+  margin-bottom: 5px; /* Espaciado entre botones */
+  width: 100%; /* Asegura que los botones ocupen el ancho del menú */
+  text-align: center;
 }
 
-.menu-dropdown a:hover {
-  background-color: #f3f4f6;
-  border-radius: 0.25rem;
+.auth-button:hover {
+  background-color: #3b82f6;
 }
 
+/* NAVEGACIÓN */
 nav {
   display: flex;
   justify-content: center;
@@ -121,6 +136,7 @@ nav {
   color: white;
 }
 
+/* PRODUCTOS */
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -158,23 +174,4 @@ nav {
   font-size: 0.9rem;
   color: #6b7280;
   margin: 0.25rem 0;
-}
-.menu-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.auth-button {
-  background-color: #1e40af;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.auth-button:hover {
-  background-color: #3b82f6;
 }

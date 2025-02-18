@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../services/api.service';
+import { UserInterfaceComponent } from '../user-interface/user-interface.component';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -13,7 +15,7 @@ export class InicioSesionComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   onSubmit(): void {
     const storedUser = localStorage.getItem('registeredUser');
@@ -31,4 +33,19 @@ export class InicioSesionComponent {
       alert('No hay usuarios registrados.');
     }
   }
+
+
+
+  /*checkIn(): void{
+    this.apiService.logIn(storedUser).subscribe({
+      next: (data) => {
+        console.log("[LOGIN LOG] Login exitoso, navegando...");
+        
+        this.router.navigate(['/main']);
+      },
+      error: (error) => {
+        console.log("[ERROR LOGIN]: Login erroneo::", error);
+      }
+    });  }*/
 }
+

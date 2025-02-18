@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule], // Importa FormsModule para usar ngModel
+  imports: [FormsModule], // Importa FormsModule para usar [(ngModel)]
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
@@ -13,27 +14,49 @@ export class RegistroComponent {
   nombre: string = '';
   email: string = '';
   password: string = '';
-  telefonoCodigo: string = '+54'; // El código de país por defecto
-  telefonoArea: string = '11'; // El código de área por defecto
-  telefonoNumero: string = ''; // El número del teléfono
+  telefonoCodigo: string = '+54'; // Código de país por defecto
+  telefonoArea: string = '11'; // Código de área por defecto
+  telefonoNumero: string = ''; // Número de teléfono
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   onSubmit(): void {
-    // Aquí podemos combinar todos los valores del teléfono en un solo campo
     const telefonoCompleto = `${this.telefonoCodigo} (${this.telefonoArea}) ${this.telefonoNumero}`;
 
-    // Guardamos los datos del usuario en localStorage
+    // 📌 Construimos el objeto con los nombres correctos
     const user = {
-      nombre: this.nombre,
-      email: this.email,
-      password: this.password,  // Asegúrate de encriptar la contraseña si la vas a usar más adelante
-      telefono: telefonoCompleto,
+      id: "",  
+      name: this.nombre,  // Usar 'nombre' en lugar de 'name'
+      gmail: this.email,  // Usar 'email' en lugar de 'gmail'
+      password: this.password,
+      phoneNumber: telefonoCompleto,  // Pasamos el teléfono combinado
+      clothes: [],
+      Admin: false
     };
 
-    localStorage.setItem('loggedInUser', JSON.stringify(user)); // Guardamos los datos en localStorage
-
-    // Redirigir al usuario después del registro
-    this.router.navigate(['/inicio-sesion']);
+    this.apiService.registerUser(user).subscribe(
+      response => {
+        console.log(user);
+        console.log('Usuario registrado:', response);
+        localStorage.setItem('loggedInUser', JSON.stringify(user)); // Guardamos en localStorage
+        this.router.navigate(['/inicio']); // Redirigir después del registro
+      },
+      error => {
+        console.error('Error al registrar usuario:', error);
+      }
+    );
   }
 }
+/*register(usuario: IUsuario): Observable<{ token: string }> {
+  return this.http.post<{ token: string }>(${this.apiURL}/api/system/register, { usuario: usuario }).pipe(
+    map(response => {
+      localStorage.setItem('tokenUser', JSON.stringify(response.token)); // Store JWT after successful registration
+      console.log("[FRONTEND LOG] Token guardado:", response.token);
+      return response;
+    }),
+    catchError(error => {
+      console.error('[ERROR]: Registration failed', error);
+      return throwError(() => new Error(error));
+    })
+  );
+}*/ //usar funcion de referencia (BARRIO - IAN, si se dignan BOE"
