@@ -1,32 +1,33 @@
-<div class="product-detail">
-  <!-- Imagen del producto -->
-  <img [src]="product.image" [alt]="product.name" class="product-image" />
 
-  <!-- Nombre del producto -->
-  <h2>{{ product.name }}</h2>
+<div class="product-container">
+  <!-- Sección del producto -->
+  <div class="product-detail">
+    <!-- Imagen del producto -->
+    <img [src]="product.images" [alt]="product.name" class="product-image" />
 
-  <!-- Características del producto -->
-  <h3>Características:</h3>
-  <p>{{ product.features }}</p>
+    <!-- Información del producto -->
+    <div class="product-info">
+      <h2>{{ product.name }}</h2>
+      <p class="price">Precio: ${{ product.price }}</p>
 
-  <!-- Descripción del producto -->
-  <h3>Descripción:</h3>
-  <p>{{ product.description }}</p>
+      <!-- Características -->
+      <p>{{ product.title }}</p>
 
-  <!-- Sección de comentarios -->
-  <div class="comment-section">
-    <h3>Comentarios</h3>
-    <!-- Campo de texto para agregar un comentario -->
-    <textarea
-      placeholder="Escribe tu comentario..."
-      [(ngModel)]="newComment"
-    ></textarea>
-    <!-- Botón para enviar el comentario -->
-    <button (click)="addComment()">Enviar comentario</button>
-
-    <!-- Lista de comentarios -->
-    <div *ngFor="let comment of comments" class="comment">
-      <p>{{ comment }}</p>
+      <!-- Descripción -->
+      <h3>Descripción:</h3>
+      <p>{{ product.description }}</p>
     </div>
   </div>
+
+  <!-- Sección del usuario -->
+  <div class="user-info">
+    <h3>Vendedor</h3>
+    <p><strong>Nombre:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.gmail }}</p>
+    <p><strong>Teléfono:</strong> {{ user.phoneNumber }}</p>
+  </div>
+</div>
+
+<!-- Sección de comentarios -->
+<div class="comment-section">
 </div>

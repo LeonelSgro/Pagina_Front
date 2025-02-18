@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { products } from '../products';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,28 +13,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  product: any; // Almacena los detalles del producto
-  newComment: string = ''; // Almacena el nuevo comentario
-  comments: string[] = []; // Lista de comentarios
+  product: any = {};
+  user: any = {};
+  newComment: string = '';
+  comments: string[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
     // Obtiene el ID del producto de la URL
     const productId = this.route.snapshot.paramMap.get('id');
-    // Busca el producto en la lista de productos
-    this.product = products.find(p => p.id === productId);
-    // Construye la ruta correcta de la imagen
-    if (this.product) {
-      this.product.image = `assets/${this.product.image}`;
-    }
-  }
 
-  // Agrega un nuevo comentario
-  addComment() {
-    if (this.newComment.trim()) {
-      this.comments.push(this.newComment);
-      this.newComment = ''; // Limpia el campo de texto
+    if (productId) {
+      this.apiService.getProductoById(productId).subscribe(data => {
+        this.product = data.post;
+        this.user = data.user; // Obtener los datos del usuario asociados al producto
+        console.log(data);
+      });
     }
   }
 }

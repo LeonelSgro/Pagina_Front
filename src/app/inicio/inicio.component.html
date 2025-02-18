@@ -3,9 +3,9 @@
     <div class="header-top">
       <h1 class="text-xl font-bold">E-commerce de Ropa</h1>
       <div class="input-container">
-        <input 
-          type="text" 
-          placeholder="Buscar productos..." 
+        <input
+          type="text"
+          placeholder="Buscar productos..."
           class="border rounded px-3 py-2 w-full"
           [(ngModel)]="searchTerm"
           (input)="filterProducts()"
@@ -27,7 +27,7 @@
       </div>
     </div>
     <nav>
-      <button 
+      <button
         *ngFor="let category of categories"
         (click)="selectCategory(category)"
         [class.selected]="category === selectedCategory"
@@ -36,20 +36,21 @@
       </button>
     </nav>
   </header>
-
+ 
   <main>
     <div>
       <h2 class="text-xl font-semibold mb-4">{{ selectedCategory }}</h2>
       <div class="product-list">
-        <button 
-          *ngFor="let product of getProductsByCategory(selectedCategory)" 
+        <button
+          *ngFor="let product of getProductsByCategory(selectedCategory)"
           class="product-card"
           (click)="viewProduct(product.id)">
-          <img [src]="product.image" [alt]="product.name" />
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.category }}</p>
+          <img [src]="product.images[0]" [alt]="product.name" />
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description }}</p>
         </button>
       </div>
     </div>
   </main>
 </div>
+ 

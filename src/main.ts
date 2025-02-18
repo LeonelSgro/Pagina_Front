@@ -1,10 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { provideRouter } from '@angular/router'; // Importa provideRouter
-import { routes } from './app/app.routes'; // Importa las rutas
+import { appProviders } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes) // Configura el enrutador
-  ]
+  providers: [...appProviders] // IMPORTANTE: Usar spread operator
 }).catch(err => console.error(err));
