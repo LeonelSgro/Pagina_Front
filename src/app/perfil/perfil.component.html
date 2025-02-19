@@ -12,15 +12,16 @@
       <p><strong>Teléfono:</strong> {{ user.phoneNumber }}</p>
     </section>
     
-    <section class="publications" *ngIf="user.publications?.length">
+    <section class="publications" *ngIf="user.clothes?.length">
       <h3>Publicaciones</h3>
       <div class="publication-list">
-        <div class="publication-card" *ngFor="let post of user.publications; let i = index">
-          <p>{{ post }}</p>
+        <div class="publication-card" *ngFor="let post of user.clothes; let i = index">
+          <p>{{ post.title }} - {{ post.price }}</p>
           <button (click)="deletePublication(i)" class="delete-button">Eliminar</button>
         </div>
       </div>
     </section>
+    
     
     <button (click)="goToAddPublication()" class="add-button">Añadir Publicación</button>
   </main>

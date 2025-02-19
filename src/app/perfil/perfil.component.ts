@@ -29,8 +29,8 @@ export class ProfileComponent implements OnInit {
         if (userId) {
           this.apiService.getUserProfileById(userId).subscribe(
             (userDetails) => {
-              this.user = userDetails; // Solo actualiza la variable user, no sessionStorage
-              console.log(this.user)
+              this.user = userDetails.user; // Solo actualiza la variable user, no sessionStorage
+              console.log(userDetails.user)
             },
             (error) => {
               console.error('Error al obtener los datos del usuario:', error);
