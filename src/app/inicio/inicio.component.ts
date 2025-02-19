@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
- 
+ import { TokenStorageService } from '../token-storage-service.service';
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -29,7 +29,7 @@ export class inicioComponent {
  
   filteredProducts:any
  
-  constructor(private router: Router, private apiService: ApiService) {} //coneccion al bak 
+  constructor(private router: Router, private apiService: ApiService, private tokenStorage: TokenStorageService) {} //coneccion al bak 
  
   ngOnInit() {
     this.checkUserLogin(); 
@@ -73,17 +73,21 @@ export class inicioComponent {
   }
  
   checkUserLogin() {
-    const storedUser = localStorage.getItem('loggedInUser');
-    if (storedUser) {
-      this.userLoggedIn = true;
-      this.userData = JSON.parse(storedUser);
+    this.userLoggedIn = this.tokenStorage.isLoggedIn(); // Verifica si el token es válido
+    if (this.userLoggedIn) {
+      this.userData = this.tokenStorage.getUser(); // Obtiene los datos del usuario
     }
   }
- 
+
   logout() {
-    localStorage.removeItem('loggedInUser');
+    console.log(this.tokenStorage.getToken())
+    this.tokenStorage.singOut(); // Elimina el token y limpia la sesión
+    console.log(this.tokenStorage.getToken())
     this.userLoggedIn = false;
     this.userData = null;
+    this.router.navigate(['/inicio']).then(() => {
+      window.location.reload(); // Recarga la página
+    });
   }
  
   goToProfile() {

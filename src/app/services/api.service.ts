@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environment';
+import { UserInterfaceComponent } from '../user-interface/user-interface.component';
+import { TokenStorageService } from '../token-storage-service.service';
  
  
 @Injectable({
@@ -13,17 +15,26 @@ export class ApiService {
   private apiUrl = environment.apiUrl +"/Posts"; //cambio el path y funcionan
   private apiUrlUsers = environment.apiUrl +"/useres"; //cambio el path y funcionan
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
   
- 
+  /*User routs*/
   registerUser(userData: any) {
-    const payload = { user: userData }; // 🔹 Envolver datos dentro de "user"
-
-    return this.http.post('http://localhost:3000/api/useres/add', payload, {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return this.http.post(`${this.apiUrlUsers}/add`, userData);
   }
 
+  LogIn(userData: { user: UserInterfaceComponent }) {
+    return this.http.post(`${this.apiUrlUsers}/login`, userData);
+  }
+  
+  getUserProfileById(userId: string): Observable<any> {
+    const headers = this.tokenStorage.header(); // Obtiene el token desde TokenStorageService
+    return this.http.get(`${this.apiUrlUsers}/getone/${userId}`, { headers });
+  }
+
+
+
+
+  /*Product routs*/
   getProductos(): Observable<any> {
     return this.http.get(`${this.apiUrl}/all`);
   }

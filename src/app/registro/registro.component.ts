@@ -21,7 +21,7 @@ export class RegistroComponent {
   constructor(private router: Router, private apiService: ApiService) {}
 
   onSubmit(): void {
-    const telefonoCompleto = `${this.telefonoCodigo} (${this.telefonoArea}) ${this.telefonoNumero}`;
+    const telefonoCompleto = `${this.telefonoCodigo}${this.telefonoArea}${this.telefonoNumero}`.replace(/\D/g, ''); // Elimina caracteres no numéricos
 
     // 📌 Construimos el objeto con los nombres correctos
     const user = {
@@ -29,16 +29,15 @@ export class RegistroComponent {
       name: this.nombre,  // Usar 'nombre' en lugar de 'name'
       gmail: this.email,  // Usar 'email' en lugar de 'gmail'
       password: this.password,
-      phoneNumber: telefonoCompleto,  // Pasamos el teléfono combinado
+      phoneNumber: Number(telefonoCompleto),  // Pasamos el teléfono combinado
       clothes: [],
       Admin: false
     };
 
-    this.apiService.registerUser(user).subscribe(
+    this.apiService.registerUser({user}).subscribe(
       response => {
         console.log(user);
         console.log('Usuario registrado:', response);
-        localStorage.setItem('loggedInUser', JSON.stringify(user)); // Guardamos en localStorage
         this.router.navigate(['/inicio']); // Redirigir después del registro
       },
       error => {
@@ -47,6 +46,8 @@ export class RegistroComponent {
     );
   }
 }
+
+
 /*register(usuario: IUsuario): Observable<{ token: string }> {
   return this.http.post<{ token: string }>(${this.apiURL}/api/system/register, { usuario: usuario }).pipe(
     map(response => {
