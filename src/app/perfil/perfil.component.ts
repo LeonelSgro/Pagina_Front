@@ -62,4 +62,8 @@ export class ProfileComponent implements OnInit {
       this.loadUserData();
     }
   }
+  modifyPublication(index: number) {
+    console.log("Modificando publicación en índice:", index);
+    // Agrega aquí la lógica para modificar la publicación
+  }
 }
