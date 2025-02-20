@@ -28,4 +28,18 @@
   </section>
 
   <button (click)="goToAddPublication()" class="add-button">+ Añadir Publicación</button>
+  <div *ngIf="selectedPublication" class="edit-form">
+    <h3>Editar Publicación</h3>
+    <label>Título:</label>
+    <input [(ngModel)]="selectedPublication.title" type="text">
+   
+    <label>Descripción:</label>
+    <textarea [(ngModel)]="selectedPublication.description"></textarea>
+   
+    <label>Precio:</label>
+    <input [(ngModel)]="selectedPublication.price" type="number">
+   
+    <button (click)="saveChanges()">Guardar Cambios</button>
+    <button (click)="cancelEdit()">Cancelar</button>
+  </div>
 </div>

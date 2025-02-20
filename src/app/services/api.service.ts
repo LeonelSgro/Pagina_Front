@@ -55,7 +55,9 @@ export class ApiService {
   
  
   actualizarProducto(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/productos/${id}`, data);
+    return this.http.put(`${this.apiUrl}/update/${id}`, data, {
+      headers: this.tokenStorage.header()
+    });
   }
  
   eliminarProducto(id: string): Observable<any> {

@@ -11,15 +11,12 @@
           (input)="filterProducts()"
         />
       </div>
-      <!-- Botón del menú desplegable -->
       <button class="menu-button" (click)="toggleMenu()">☰</button>
       <div class="menu-dropdown" [class.active]="menuOpen">
-        <!-- Si el usuario está logueado, muestra perfil y cerrar sesión -->
         <ng-container *ngIf="userLoggedIn; else authOptions">
           <button class="auth-button" (click)="goToProfile()">Perfil</button>
           <button class="auth-button" (click)="logout()">Cerrar Sesión</button>
         </ng-container>
-        <!-- Si no está logueado, muestra las opciones de inicio de sesión y registro -->
         <ng-template #authOptions>
           <button class="auth-button" (click)="goToLogin()">Iniciar Sesión</button>
           <button class="auth-button" (click)="goToRegister()">Registrarse</button>
@@ -36,21 +33,23 @@
       </button>
     </nav>
   </header>
- 
+  
   <main>
     <div>
       <h2 class="text-xl font-semibold mb-4">{{ selectedCategory }}</h2>
       <div class="product-list">
-        <button
-          *ngFor="let product of getProductsByCategory(selectedCategory)"
-          class="product-card"
-          (click)="viewProduct(product.id)">
+        <div *ngFor="let product of getProductsByCategory(selectedCategory)" class="product-card">
           <img [src]="product.images[0]" [alt]="product.name" />
           <h3>{{ product.title }}</h3>
           <p>{{ product.description }}</p>
-        </button>
+          
+          <!-- Botones solo visibles para administradores -->
+          <div *ngIf="isAdmin" class="admin-buttons">
+            <button class="delete-button" (click)="deleteProduct(product.id)">Eliminar</button>
+            <button class="edit-button" (click)="editProduct(product.id)">Modificar</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 </div>
- 

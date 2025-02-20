@@ -4,7 +4,7 @@ body {
   padding: 0;
   background-color: #f9fafb;
   color: #333;
-  overflow-x: hidden; /* Evita desbordamiento horizontal */
+  overflow-x: hidden;
 }
 
 .container {
@@ -16,11 +16,11 @@ body {
 /* NAVBAR MEJORADA */
 header {
   background-color: #ffffff;
-  padding: 0.5rem 0; /* Hacemos el encabezado más delgado */
+  padding: 0.5rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-  width: 100vw; /* Asegura que ocupe toda la pantalla */
-  position: fixed; /* Fija la navbar en la parte superior */
+  width: 100vw;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -33,7 +33,7 @@ header {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem; /* Añadimos un poco de padding a los lados */
+  padding: 0 1rem;
 }
 
 .header-top h1 {
@@ -50,7 +50,7 @@ header {
 
 .header-top input[type="text"] {
   width: 100%;
-  padding: 0.5rem; /* Hacemos el input más delgado */
+  padding: 0.5rem;
   font-size: 1rem;
   border: 2px solid #e5e7eb;
   border-radius: 0.5rem;
@@ -70,10 +70,10 @@ header {
   color: #333;
 }
 
-/* MENÚ DESPLEGABLE MEJORADO */
+/* MENÚ DESPLEGABLE */
 .menu-dropdown {
   position: absolute;
-  top: 50px; /* Para que se despliegue debajo del botón */
+  top: 50px;
   right: 10px;
   background: white;
   border: 1px solid #e5e7eb;
@@ -82,12 +82,12 @@ header {
   display: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 150px;
-  flex-direction: column; /* Asegura que los botones estén en columna */
-  align-items: stretch; /* Ocupa todo el ancho */
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .menu-dropdown.active {
-  display: flex; /* Hace visible el menú */
+  display: flex;
 }
 
 /* BOTONES DEL MENÚ */
@@ -100,8 +100,8 @@ header {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.2s ease;
-  margin-bottom: 5px; /* Espaciado entre botones */
-  width: 100%; /* Asegura que los botones ocupen el ancho del menú */
+  margin-bottom: 5px;
+  width: 100%;
   text-align: center;
 }
 
@@ -115,7 +115,7 @@ nav {
   justify-content: center;
   width: 100%;
   background-color: transparent;
-  padding: 0.5rem 0; /* Hacemos el nav más delgado */
+  padding: 0.5rem 0;
   gap: 1rem;
 }
 
@@ -151,6 +151,7 @@ nav {
   text-align: center;
   background-color: white;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 1rem;
 }
 
 .product-card:hover {
@@ -174,4 +175,40 @@ nav {
   font-size: 0.9rem;
   color: #6b7280;
   margin: 0.25rem 0;
+}
+
+/* ESTILOS PARA BOTONES DE ADMINISTRADOR */
+.admin-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.edit-button {
+  background-color: #facc15;
+  color: black;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.delete-button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.edit-button:hover {
+  background-color: #eab308;
+}
+
+.delete-button:hover {
+  background-color: #b91c1c;
 }
