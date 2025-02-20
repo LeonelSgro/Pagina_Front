@@ -10,6 +10,7 @@ import { ApiService } from '../services/api.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
+
 export class RegistroComponent {
   nombre: string = '';
   email: string = '';
@@ -37,7 +38,7 @@ export class RegistroComponent {
     this.apiService.registerUser({user}).subscribe(
       response => {
         console.log(user);
-        console.log('Usuario registrado:', response);
+        console.log('Usuario registrado:', user);
         this.router.navigate(['/inicio']); // Redirigir después del registro
       },
       error => {
