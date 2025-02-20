@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environment';
 import { UserInterfaceComponent } from '../user-interface/user-interface.component';
 import { TokenStorageService } from '../token-storage-service.service';
+
  
  
 @Injectable({
@@ -43,17 +44,28 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/getone/${id}`);
   }
  
-  crearProducto(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/productos`, data);
+  crearProducto(userId: string, data: any): Observable<any> {
+    const payload = { post: data }; // Envolver los datos en un objeto con la clave "post"
+  
+    return this.http.post(`${this.apiUrl}/add/${userId}`, payload, {
+      headers: this.tokenStorage.header() // Asegurar que el token se envía
+    });
   }
+  
+  
  
   actualizarProducto(id: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/productos/${id}`, data);
   }
  
   eliminarProducto(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/productos/${id}`);
+    return this.http.delete(`${this.apiUrl}/delete/${id}`, {
+      headers: this.tokenStorage.header()
+    });
   }
+  
+  
+  
 
 
   getUsuarios(): Observable<any> {

@@ -1,21 +1,38 @@
 <div class="add-publication-container">
-    <h2>Añadir Publicación</h2>
-    <form (ngSubmit)="addPublication()">
-      <div class="form-group">
-        <label for="title">Título:</label>
-        <input type="text" id="title" [(ngModel)]="publication.title" name="title" required />
+  <h2>Añadir Publicación</h2>
+  <form (ngSubmit)="addPublication()">
+    <div class="form-group">
+      <label for="title">Título:</label>
+      <input type="text" id="title" [(ngModel)]="publication.title" name="title" required />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción:</label>
+      <textarea id="description" [(ngModel)]="publication.description" name="description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Precio:</label>
+      <input 
+        type="number" 
+        id="price" 
+        [(ngModel)]="publication.price" 
+        name="price" 
+        required 
+        min="0" 
+        step="0.01" 
+        placeholder="Ingrese el precio" />
+    </div>
+
+    <div class="form-group">
+      <label>URLs de Imágenes:</label>
+      <div *ngFor="let image of publication.images; let i = index">
+        <input type="text" [(ngModel)]="publication.images[i]" name="image{{i}}" placeholder="URL de la imagen" required />
+        <button type="button" (click)="removeImageField(i)" *ngIf="publication.images.length > 1">🗑️</button>
       </div>
-  
-      <div class="form-group">
-        <label for="description">Descripción:</label>
-        <textarea id="description" [(ngModel)]="publication.description" name="description" required></textarea>
-      </div>
-  
-      <div class="form-group">
-        <label for="image">URL de Imagen:</label>
-        <input type="text" id="image" [(ngModel)]="publication.image" name="image" required />
-      </div>
-  
-      <button type="submit">Publicar</button>
-    </form>
+      <button type="button" (click)="addImageField()">➕ Agregar Imagen</button>
+    </div>
+
+    <button type="submit">Publicar</button>
+  </form>
 </div>

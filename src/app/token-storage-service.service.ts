@@ -75,10 +75,13 @@ export class TokenStorageService {
   }
 
   public header(): any {
+    const token = this.getToken();
+    console.log('Token enviado en header:', token); // Agrega este log
     return new HttpHeaders({
-      'x-access-token': this.getToken() || '',
+      'x-access-token': token || '',
     });
   }
+  
 
   isLoggedIn(): boolean {
     const token = this.getToken();

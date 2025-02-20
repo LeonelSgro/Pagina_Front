@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProfileComponent implements OnInit {
   user: any = null;
+  publicacion: any = null;
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -54,14 +55,17 @@ export class ProfileComponent implements OnInit {
   }
 
   deletePublication(index: number) {
-    if (this.user && this.user.publications) {
-      this.user.publications.splice(index, 1);
-      localStorage.setItem('loggedInUser', JSON.stringify(this.user));
-
-      // Volver a cargar los datos después de eliminar
-      this.loadUserData();
+    const publication = this.user.clothes[index]; // Asegúrate de que `publications` es el array correcto
+    if (publication && publication.id) {
+      this.apiService.eliminarProducto(publication.id).subscribe(response => {
+        console.log('Publicación eliminada', response);
+        this.user.clothes.splice(index, 1); // Opcional: eliminar del array localmente
+      }, error => {
+        console.error('Error al eliminar la publicación', error);
+      });
     }
   }
+  
   modifyPublication(index: number) {
     console.log("Modificando publicación en índice:", index);
     // Agrega aquí la lógica para modificar la publicación
