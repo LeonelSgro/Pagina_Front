@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -10,44 +10,48 @@ import { ApiService } from '../services/api.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
-
 export class RegistroComponent {
   nombre: string = '';
   email: string = '';
+  location: string = ''; // Nueva propiedad para la ubicación
   password: string = '';
   telefonoCodigo: string = '+54'; // Código de país por defecto
   telefonoArea: string = '11'; // Código de área por defecto
   telefonoNumero: string = ''; // Número de teléfono
+  Admin: boolean = false; // Nueva propiedad para el rol de administrador
 
   constructor(private router: Router, private apiService: ApiService) {}
 
   onSubmit(): void {
-    const telefonoCompleto = `${this.telefonoCodigo}${this.telefonoArea}${this.telefonoNumero}`.replace(/\D/g, ''); // Elimina caracteres no numéricos
+    const telefonoCompleto =
+      `${this.telefonoCodigo}${this.telefonoArea}${this.telefonoNumero}`.replace(
+        /\D/g,
+        ''
+      );
 
-    // 📌 Construimos el objeto con los nombres correctos
     const user = {
-      id: "",  
-      name: this.nombre,  // Usar 'nombre' en lugar de 'name'
-      gmail: this.email,  // Usar 'email' en lugar de 'gmail'
+      id: '',
+      name: this.nombre,
+      gmail: this.email,
+      location: this.location,
       password: this.password,
-      phoneNumber: Number(telefonoCompleto),  // Pasamos el teléfono combinado
+      phoneNumber: Number(telefonoCompleto),
       clothes: [],
-      Admin: false
+      Admin: this.Admin,
     };
 
-    this.apiService.registerUser({user}).subscribe(
-      response => {
+    this.apiService.registerUser({ user }).subscribe(
+      (response) => {
         console.log(user);
         console.log('Usuario registrado:', user);
         this.router.navigate(['/inicio']); // Redirigir después del registro
       },
-      error => {
+      (error) => {
         console.error('Error al registrar usuario:', error);
       }
     );
   }
 }
-
 
 /*register(usuario: IUsuario): Observable<{ token: string }> {
   return this.http.post<{ token: string }>(${this.apiURL}/api/system/register, { usuario: usuario }).pipe(

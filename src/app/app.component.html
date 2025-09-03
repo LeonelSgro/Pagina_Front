@@ -1,3 +1,23 @@
-<body>
-  <router-outlet></router-outlet>
-</body>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a [routerLink]="['/']" class="nav-logo">👕E-Commerce de Ropa</a>
+    <a routerLink="/anadir" routerLinkActive="active" class="nav-link">Añadir Producto</a>
+    <a routerLink="/perfil" routerLinkActive="active" class="nav-link" *ngIf="userLoggedIn">Perfil</a>
+  </div>
+  <div class="nav-right">
+    <button class="menu-button" (click)="toggleMenu()">☰</button>
+    <div class="menu-dropdown" [class.active]="menuOpen">
+      <ng-container *ngIf="userLoggedIn; else authOptions">
+        <button class="auth-button" (click)="goToProfile()">Perfil</button>
+        <button class="auth-button" (click)="logout()">Cerrar Sesión</button>
+      </ng-container>
+      <ng-template #authOptions>
+        <button class="auth-button" (click)="goToLogin()">Iniciar Sesión</button>
+        <button class="auth-button" (click)="goToRegister()">Registrarse</button>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+

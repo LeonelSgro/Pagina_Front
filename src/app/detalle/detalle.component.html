@@ -1,0 +1,26 @@
+<div class="clothes-detail">
+  <h1>{{ producto.title}}</h1>
+  <h4 class="category"> {{ producto.category }}</h4>
+  <p class="description">{{ producto.description }}</p>
+  <p class="price">Precio: ${{ producto.price }}</p>
+  <p class="seller">Vendido por: {{ nombreUsuario }}</p>
+ <div class="images">
+    <h3>Imágenes:</h3>
+    <div class="image-gallery">
+      <img *ngFor="let image of producto.images; index as i"
+           [src]="getImageSrc(i)"
+           alt="{{ producto.title }}"
+           (click)="expandImage(image)"
+           [class.expanded]="expandedImage === image"
+           style="cursor:pointer;"
+      />
+      <div *ngIf="expandedImage" class="expand-overlay" (click)="expandImage(null)"></div>
+    </div>
+  </div>
+  <p class="created-at">Publicado el: {{ producto.createdAt }}</p>
+  <div class="contact-section">
+    <button class="contact-btn" (click)="revealPhone = true" *ngIf="!revealPhone">Contactar</button>
+    <span class="phone-number" *ngIf="revealPhone">Teléfono: {{ numeroTelefono }}</span>
+  </div>
+
+</div>

@@ -12,7 +12,7 @@
     <h3 class="section-title">Mis Publicaciones</h3>
     <div class="publication-list">
       <div class="publication-card" *ngFor="let post of user.clothes; let i = index">
-        <img [src]="post.images.length ? post.images[0] : 'assets/default-placeholder.png'" 
+        <img [src]=" 'http://localhost:3000/api/Posts/image/' + post.id + '/0'" alt="Imagen de la publicación"
      class="publication-image">
         <div class="publication-info">
           <h4>{{ post.title }}</h4>
@@ -32,13 +32,13 @@
     <h3>Editar Publicación</h3>
     <label>Título:</label>
     <input [(ngModel)]="selectedPublication.title" type="text">
-   
+
     <label>Descripción:</label>
     <textarea [(ngModel)]="selectedPublication.description"></textarea>
-   
+
     <label>Precio:</label>
     <input [(ngModel)]="selectedPublication.price" type="number">
-   
+
     <button (click)="saveChanges()">Guardar Cambios</button>
     <button (click)="cancelEdit()">Cancelar</button>
   </div>

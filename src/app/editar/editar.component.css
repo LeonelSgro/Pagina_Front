@@ -1,43 +1,44 @@
 .image-preview-list {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 10px;
 }
 .image-preview-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .image-preview-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-bottom: 4px;
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	margin-bottom: 4px;
 }
 .image-preview-item button {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #dc2626;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	background: #dc2626;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	font-size: 1rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
 }
 .image-preview-item button:hover {
-  background: #b91c1c;
+	background: #b91c1c;
 }
+
 .add-publication-container {
   max-width: 500px;
   margin: 20px auto;

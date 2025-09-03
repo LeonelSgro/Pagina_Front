@@ -1,0 +1,47 @@
+<div class="edit-publication-container" *ngIf="producto">
+	<h2>Editar Publicación</h2>
+	<form (ngSubmit)="saveChanges()">
+		<div class="form-group">
+			<label for="title">Título:</label>
+			<input type="text" id="title" [(ngModel)]="producto.title" name="title" required />
+		</div>
+
+		<div class="form-group">
+			<label for="description">Descripción:</label>
+			<textarea id="description" [(ngModel)]="producto.description" name="description" required></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="price">Precio:</label>
+			<input type="number" id="price" [(ngModel)]="producto.price" name="price" required min="0" step="0.01" />
+		</div>
+
+		<div class="form-group">
+			<label for="category">Categoría:</label>
+			<select id="category" [(ngModel)]="producto.category" name="category" required>
+				<option value="" disabled>Seleccione una categoría</option>
+				<option value="Calzado">Calzado</option>
+				<option value="Parte de Arriba">Parte de Arriba</option>
+				<option value="Parte de Abajo">Parte de Abajo</option>
+				<option value="Ropa Interior">Ropa Interior</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label>Imágenes:</label>
+			<input type="file" (change)="onFileChange($event)" multiple accept="image/*" />
+			<div class="image-preview-list">
+				<div *ngFor="let image of (producto.images.concat(producto.newImages || [])); let i = index" class="image-preview-item">
+					<img [src]="getImageSrc(image, i)" alt="Imagen seleccionada" *ngIf="getImageSrc(image, i)" />
+					<button type="button" (click)="removeImage(i)" *ngIf="getImageSrc(image, i)">🗑️</button>
+				</div>
+			</div>
+		</div>
+
+		<button type="submit">Guardar Cambios</button>
+		<button type="button" (click)="cancelEdit()">Cancelar</button>
+	</form>
+</div>
+<div *ngIf="!producto">
+	<p>Cargando publicación...</p>
+</div>

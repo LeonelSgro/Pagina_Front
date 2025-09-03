@@ -1,12 +1,11 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { HttpHeaders } from '@angular/common/http';
 import { UserInterfaceComponent } from './user-interface/user-interface.component';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class TokenStorageService {
   constructor() {}
 
@@ -42,13 +41,14 @@ export class TokenStorageService {
     }
 
     return {
-      id:'',
+      id: '',
       name: 'a',
       gmail: 'a',
       password: 'a',
       phoneNumber: 0,
+      location: '',
       clothes: [],
-      Admin: false
+      Admin: false,
     };
   }
 
@@ -58,7 +58,7 @@ export class TokenStorageService {
       const parsed = JSON.parse(user);
       return parsed.rol;
     }
-    return "";
+    return '';
   }
 
   getDecodedToken(): JwtPayload | null {
@@ -81,7 +81,6 @@ export class TokenStorageService {
       'x-access-token': token || '',
     });
   }
-  
 
   isLoggedIn(): boolean {
     const token = this.getToken();

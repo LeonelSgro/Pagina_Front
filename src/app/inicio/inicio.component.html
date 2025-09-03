@@ -1,28 +1,14 @@
 <div class="container">
   <header class="mb-2">
     <div class="header-top">
-      <h1 class="text-xl font-bold">E-commerce de Ropa</h1>
-      <div class="input-container">
         <input
           type="text"
           placeholder="Buscar productos..."
-          class="border rounded px-3 py-2 w-full"
+          class="search"
           [(ngModel)]="searchTerm"
           (input)="filterProducts()"
         />
       </div>
-      <button class="menu-button" (click)="toggleMenu()">☰</button>
-      <div class="menu-dropdown" [class.active]="menuOpen">
-        <ng-container *ngIf="userLoggedIn; else authOptions">
-          <button class="auth-button" (click)="goToProfile()">Perfil</button>
-          <button class="auth-button" (click)="logout()">Cerrar Sesión</button>
-        </ng-container>
-        <ng-template #authOptions>
-          <button class="auth-button" (click)="goToLogin()">Iniciar Sesión</button>
-          <button class="auth-button" (click)="goToRegister()">Registrarse</button>
-        </ng-template>
-      </div>
-    </div>
     <nav>
       <button
         *ngFor="let category of categories"
@@ -33,23 +19,98 @@
       </button>
     </nav>
   </header>
-  
+
   <main>
     <div>
-      <h2 class="text-xl font-semibold mb-4">{{ selectedCategory }}</h2>
-      <div class="product-list">
-        <div *ngFor="let product of getProductsByCategory(selectedCategory)" class="product-card">
-          <img [src]="product.images[0]" [alt]="product.name" />
+      <div *ngIf="loading" class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+      <div class="product-list" *ngIf="!loading">
+        <div *ngFor="let product of getProductList()" class="product-card" (click)="goToDetalle(product.id)">
+          <div class="carousel" (click)="$event.stopPropagation()">
+            <button class="carousel-btn left" (click)="prevImage(product)">⬅</button>
+            <img [src]="getImageUrl(product.id, carouselIndexes[product.id])" [alt]="product.name" />
+            <button class="carousel-btn right" (click)="nextImage(product)">➡</button>
+          </div>
+          <div class="carousel-indicators">
+            <span *ngFor="let img of product.images; let i = index"
+                  [class.active]="(carouselIndexes[product.id] || 0) === i">
+              ●
+            </span>
+          </div>
+          <p style="font-size: 2rem;">${{product.price}}</p>
           <h3>{{ product.title }}</h3>
           <p>{{ product.description }}</p>
-          
+
           <!-- Botones solo visibles para administradores -->
           <div *ngIf="isAdmin" class="admin-buttons">
-            <button class="delete-button" (click)="deleteProduct(product.id)">Eliminar</button>
-            <button class="edit-button" (click)="editProduct(product.id)">Modificar</button>
+            <button class="delete-button" (click)="deleteProduct(product.id); $event.stopPropagation()">Eliminar</button>
+            <button class="edit-button" (click)="editProduct(product.id); $event.stopPropagation()">Modificar</button>
           </div>
         </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+        <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+          <button (click)="goToPage(i + 1)" [class.selected]="page === (i + 1)">{{ i + 1 }}</button>
+        </ng-container>
+        <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
       </div>
     </div>
   </main>
 </div>
+
+<style>
+.product-card {
+  cursor: pointer;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0 0 0;
+}
+.pagination button {
+  background: #f3f4f6;
+  border: none;
+  color: #1976d2;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.pagination button.selected, .pagination button:hover {
+  background: #1976d2;
+  color: #fff;
+}
+.pagination button:disabled {
+  background: #e5e7eb;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+</style>
+
+<style>
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #1976d2;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>

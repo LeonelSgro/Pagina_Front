@@ -1,14 +1,14 @@
-import { Routes, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { Routes, provideRouter } from '@angular/router';
 
-import { importProvidersFrom } from '@angular/core';
-
+import { AnadirComponent } from './anadir/anadir.component';
+import { DetalleComponent } from './detalle/detalle.component';
+import { EditarComponent } from './editar/editar.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { inicioComponent } from './inicio/inicio.component';
+import { ProfileComponent } from './perfil/perfil.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RegistroComponent } from './registro/registro.component';
-import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
-import { ProfileComponent } from './perfil/perfil.component';
-import { AnadirComponent } from './anadir/anadir.component';
 
 export const routes: Routes = [
   { path: '', component: inicioComponent },
@@ -17,10 +17,9 @@ export const routes: Routes = [
   { path: 'inicio-sesion', component: InicioSesionComponent },
   { path: 'perfil', component: ProfileComponent },
   { path: 'anadir', component: AnadirComponent },
-  { path: '**', redirectTo: '' } // Manejar rutas inválidas
+  { path: 'detalle/:id', component: DetalleComponent },
+  { path: 'editar/:id', component: EditarComponent },
+  { path: '**', redirectTo: '' }, // Manejar rutas inválidas
 ];
 
-export const appProviders = [
-  provideRouter(routes), 
-  provideHttpClient()
-];
+export const appProviders = [provideRouter(routes), provideHttpClient()];

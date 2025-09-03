@@ -1,0 +1,118 @@
+.clothes-detail {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.clothes-detail h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.clothes-detail .category {
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 18px;
+}
+
+.clothes-detail .description {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 18px;
+}
+
+.clothes-detail .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 20px;
+}
+
+.clothes-detail .images {
+  margin-bottom: 24px;
+}
+
+.clothes-detail .images h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.image-gallery {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.image-gallery img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s, width 0.2s, height 0.2s, z-index 0.2s;
+  z-index: 1;
+  position: relative;
+  background: #fff;
+}
+.image-gallery img:hover {
+  transform: scale(1.05);
+  border-color: #1976d2;
+}
+.image-gallery img.expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  height: 350px;
+  z-index: 101;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
+  border-color: #1976d2;
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #fff;
+}
+.expand-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  cursor: pointer;
+}
+
+.clothes-detail .created-at {
+  font-size: 0.95rem;
+  color: #999;
+  margin-top: 18px;
+}
+
+.contact-section {
+  margin: 18px 0 10px 0;
+}
+.contact-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.contact-btn:hover {
+  background: #1565c0;
+}
+.phone-number {
+  font-size: 1.1rem;
+  color: #1976d2;
+  font-weight: bold;
+  margin-left: 10px;
+}
