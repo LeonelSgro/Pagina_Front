@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../environment';
 import { ApiService } from '../services/api.service';
 import { TokenStorageService } from '../token-storage-service.service';
 
@@ -78,7 +79,7 @@ export class inicioComponent {
   }
 
   getImageUrl(productId: string, index: number): string {
-    return `http://localhost:3000/api/Posts/image/${productId}/${index}`;
+    return `${environment.apiUrl}/Posts/image/${productId}/${index}`;
   }
 
   checkUserLogin() {

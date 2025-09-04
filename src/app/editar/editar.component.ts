@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../environment';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -73,7 +74,7 @@ export class EditarComponent {
     if (typeof image === 'string') return image;
     // If the image is from the server
     if (this.original.images && index < this.original.images.length) {
-      return `http://localhost:3000/api/Posts/image/${this.producto.id}/${index}`;
+      return `${environment.apiUrl}/Posts/image/${this.producto.id}/${index}`;
     }
     // If the image is a new upload
     if (image.data && image.contentType) {

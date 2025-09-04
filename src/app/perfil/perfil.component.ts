@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../environment';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -17,13 +18,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router, private apiService: ApiService) {}
 
-  getImageUrl(productId: string, index: number): string {
-    return `http://localhost:3000/api/Posts/image/${productId}/${index}`;
-  }
   ngOnInit(): void {
     this.loadUserData();
   }
 
+  getImageUrl(productId: string, index: number): string {
+    return `${environment.apiUrl}/Posts/image/${productId}/${index}`;
+  }
   loadUserData() {
     const storedUser = sessionStorage.getItem('USER_KEY'); // Obtener el JSON de sessionStorage
     if (storedUser) {

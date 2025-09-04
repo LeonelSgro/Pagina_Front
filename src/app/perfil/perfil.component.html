@@ -12,7 +12,7 @@
     <h3 class="section-title">Mis Publicaciones</h3>
     <div class="publication-list">
       <div class="publication-card" *ngFor="let post of user.clothes; let i = index">
-        <img [src]=" 'http://localhost:3000/api/Posts/image/' + post.id + '/0'" alt="Imagen de la publicación"
+        <img [src]="getImageUrl(post.id, 0)" alt="Imagen de la publicación"
      class="publication-image">
         <div class="publication-info">
           <h4>{{ post.title }}</h4>
