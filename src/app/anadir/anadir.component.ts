@@ -56,7 +56,7 @@ export class AnadirComponent {
     // log the reason why the button is disabled
     console.log('Submit enabled check:', this.publication);
 
-    /*
+    
     return !(
       this.publication.title &&
       this.publication.category &&
@@ -67,7 +67,7 @@ export class AnadirComponent {
       this.publication.price > 0 &&
       /^\d+(\.\d{1,2})?$/.test(this.publication.price.toString())
     );
-    */
+    
   }
 
   onFileChange(event: any) {
